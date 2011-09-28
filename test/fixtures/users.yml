@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uname: MyString
+  name: MyString
+  email: MyString
+  password: 
+  admin_perm: false
+
+two:
+  uname: MyString
+  name: MyString
+  email: MyString
+  password: 
+  admin_perm: false
