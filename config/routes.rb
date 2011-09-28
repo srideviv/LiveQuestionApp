@@ -1,4 +1,8 @@
 LiveQuestionApp::Application.routes.draw do
+  match "/users/login" => "users#login"        #to redirect to login page first and not a user of id name login
+  match "/users/signIn" => "users#signIn"
+  match "/users/search" => "users#search"
+    match "/posts/search" => "posts#search"
   resources :comment_votes
 
   resources :votes

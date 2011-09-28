@@ -10,6 +10,23 @@ class UsersController < ApplicationController
     end
   end
 
+  def login
+    respond_to do  |format|
+      format.html #login.html.erb
+    end
+  end
+  # GET /users/login
+  # GET /users/login.json
+  def signIn
+    @user = User.find_by_uname(params[:uname])
+    if @user == nil || !@user.authenticate(params[:uname], params[:password])
+      redirect_to :action => "login", :notice => "Unable to log in to the system. Please check your credentials"
+    elsif @user.authenticate(params[:uname], params[:password])
+      session[:current_user_id] = @user.id
+      redirect_to :controller => 'posts',:action => "new"
+    end
+
+  end
   # GET /users/1
   # GET /users/1.json
   def show
@@ -68,6 +85,23 @@ class UsersController < ApplicationController
       end
     end
   end
+
+
+  def search
+    if (params[:search]== 'user')
+      @users = User.find_all_by_name(params[:inp])
+      if @users != nil
+        respond_to do |format|
+          format.html #search.html.erb
+          format.json { render json: @users }
+        end
+      end
+    elsif (params[:search]== 'post')
+          redirect_to :controller => "posts", :action => "search"
+
+    end
+  end
+
 
   # DELETE /users/1
   # DELETE /users/1.json

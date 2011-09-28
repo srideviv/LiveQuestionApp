@@ -10,6 +10,15 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = Post.where("question LIKE ?","%"+params[:inp]+"%")
+    if @posts != nil
+      respond_to do |format|
+        format.html # search.html.erb
+        format.json { render json: @posts }
+      end
+    end
+  end
   # GET /posts/1
   # GET /posts/1.json
   def show

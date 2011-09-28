@@ -3,17 +3,17 @@
 
 <div style="margin-right: 350px; margin-left: 350px; text-padding:20px;  background-color: #F5F5F0;font-size: 14px; color: #007700;">
     <p align="center">Search for posts:
-    <form align="center" method="get">
-      <input type="text" name="search"/> <input type="button"/>
+    <form align="center" action="/users/search" method="get">
+      <input type="text" name="inp"/> <input type="submit" name="search" value="user"/> <input type="submit" name="search" value="post"/>
     </form>
     </p>
   <br/>
 </div>
 <h4 style="color:#007700;">Live Question App Login</h4>
 <div style="background-color: #F5F5F0; width: 350px; height: 170px; border-top: 1px solid #007700; border-bottom:1px solid #007700; ">
-  <form method="get">
+  <form action="/users/signIn" method="get">
     <br/><b>User ID: </b>  <br/>
-    <input type="text" name="userid" style="width: 140px;"/>
+    <input type="text" name="uname" style="width: 140px;"/>
     <br/>
     <b> Password: </b>  <br/>
     <input type="text" name="password" style="width: 140px;"/>
