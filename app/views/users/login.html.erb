@@ -1,10 +1,9 @@
 <div style="background-color: #007700; height:40px;"><p style="text-indent:25px;padding-top: 5px; color:white; font-family: Verdana; font-size: 18px; font-weight: bold;">     Live Question Tool App: CSC 517 </p> </div>
      <br/><br/>
-
 <div style="margin-right: 350px; margin-left: 350px; text-padding:20px;  background-color: #F5F5F0;font-size: 14px; color: #007700;">
     <p align="center">Search for posts:
-    <form align="center" action="/users/search" method="get">
-      <input type="text" name="inp"/> <input type="submit" name="search" value="user"/> <input type="submit" name="search" value="post"/>
+    <form action="/users/search" align="center"  method="get" id="search_form">
+      <input id="search_input" type="text" name="inp"/> <input type="submit"  id="user"  name="usearch" value="user"/> <input type="submit" id="post" name="psearch" value="post" />
     </form>
     </p>
   <br/>

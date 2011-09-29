@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       redirect_to :action => "login", :notice => "Unable to log in to the system. Please check your credentials"
     elsif @user.authenticate(params[:uname], params[:password])
       session[:current_user_id] = @user.id
-      redirect_to :controller => 'posts',:action => "new"
+      redirect_to @user
     end
 
   end
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
+    @sessionname = session[:current_user_id]
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -88,7 +88,6 @@ class UsersController < ApplicationController
 
 
   def search
-    if (params[:search]== 'user')
       @users = User.find_all_by_name(params[:inp])
       if @users != nil
         respond_to do |format|
@@ -96,10 +95,8 @@ class UsersController < ApplicationController
           format.json { render json: @users }
         end
       end
-    elsif (params[:search]== 'post')
-          redirect_to :controller => "posts", :action => "search"
-
-    end
+    #elsif (params[:search]== 'post')
+          #redirect_to :controller => "posts", :action => "search"
   end
 
 

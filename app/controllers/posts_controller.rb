@@ -11,7 +11,8 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.where("question LIKE ?","%"+params[:inp]+"%")
+    @posts = Post.find(:all, :conditions => "question LIKE '%#{params[:inp]}%'")
+    #@posts = Post.where("question LIKE ?","%"+(params[:inp])+"%")
     if @posts != nil
       respond_to do |format|
         format.html # search.html.erb
@@ -34,11 +35,16 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
+    @user= session[:current_user_id]
+    if @user != nil
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @post }
+      end
+    else
+      redirect_to :controller => "users", :action => "login" , :notice => "You have to login to post a question"
     end
+
   end
 
   # GET /posts/1/edit
