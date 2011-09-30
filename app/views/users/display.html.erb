@@ -1,0 +1,21 @@
+<div style="background-color: #007700; height:40px;"><p style="text-indent:25px;padding-top: 5px; color:white; font-family: Verdana; font-size: 18px; font-weight: bold;">     Live Question Tool App: CSC 517 </p> </div>
+
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</table>
+ <% @resultArray.each do |result| %>
+    <tr>
+      <td>
+        <%= result %> <br/>
+      </td>
+    </tr>
+  <% end %>
+<br />
+
+<%= link_to 'New Post', new_post_path %>

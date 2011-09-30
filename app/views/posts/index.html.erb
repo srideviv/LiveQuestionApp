@@ -11,11 +11,19 @@
 
 <% @posts.each do |post| %>
   <tr>
+    <td> </td>
     <td><%= post.question %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'New', new_comment_path(:post_id => post.id,:post_question => post.question) %></td>
+    <td><% post.comments.each do |comment|%>
+        <%= comment.reply %><br/>
+        <% end %>
+        </td>
   </tr>
+
+
 <% end %>
 </table>
 

@@ -10,6 +10,34 @@ class UsersController < ApplicationController
     end
   end
 
+  #GET /users/display
+  def display
+    @users = User.all
+    @resultArray= Array.new
+    for user in @users do
+      @result = user.name
+      @posts = Post.find_all_by_user_id(user.id)
+      for post in @posts do
+        temp = Array.new
+        @posts_ques =  post.question
+        @comments = Comment.find_all_by_post_id(post.id)
+        @comments_array = Array.new
+        for comment in @comments do
+          @comments_array << comment.reply
+        end
+        temp << @result << @posts_ques << @comments_array #for every user, find user name, hi
+        @resultArray << temp
+      end
+
+    end
+    respond_to do |format|
+      format.html # display.html.erb
+      format.json { render json: @resultArray }
+    end
+
+  end
+
+  #GET /users/login
   def login
     respond_to do  |format|
       format.html #login.html.erb
@@ -88,7 +116,9 @@ class UsersController < ApplicationController
 
 
   def search
-      @users = User.find_all_by_name(params[:inp])
+     @users = User.find_all_by_name(params[:inp])
+   #  @posts = Post.find_by_user_id(@users.id)
+
       if @users != nil
         respond_to do |format|
           format.html #search.html.erb

@@ -31,12 +31,13 @@ class PostsController < ApplicationController
     end
   end
 
+
   # GET /posts/new
   # GET /posts/new.json
   def new
     @post = Post.new
     @user= session[:current_user_id]
-    if @user != nil
+    if @user != nil  #if session id is set
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @post }
@@ -55,11 +56,14 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
 
+     @user_id = session[:current_user_id]
+     @post = Post.new()
+     @post.user_id = @user_id
+     @post.question = params[:post][:question]
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: session[:current_user_id] }
         format.json { render json: @post, status: :created, location: @post }
       else
         format.html { render action: "new" }
